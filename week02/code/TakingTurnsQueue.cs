@@ -37,17 +37,25 @@ public class TakingTurnsQueue
         {
             throw new InvalidOperationException("No one in the queue.");
         }
+
+        Person person = _people.Dequeue();
+
+        // DMM: Re-enqueue logic for infinite or remaining turns
+        if (person.Turns <= 0)
+        {
+            _people.Enqueue(person); // Infinite turns
+        }
+        else if (person.Turns > 1)
+        {
+            person.Turns--;
+            _people.Enqueue(person);
+        }
         else
         {
-            Person person = _people.Dequeue();
-            if (person.Turns > 1)
-            {
-                person.Turns -= 1;
-                _people.Enqueue(person);
-            }
-
-            return person;
+            person.Turns--; // Reaches zero, so do not re-enqueue
         }
+
+        return person;
     }
 
     public override string ToString()

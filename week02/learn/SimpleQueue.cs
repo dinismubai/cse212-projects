@@ -19,9 +19,9 @@
         // Expected Result: It should display 200, then 300, then 400 in that order
         Console.WriteLine("Test 2");
         queue = new SimpleQueue();
-        queue.Enqueue(200);
-        queue.Enqueue(300);
         queue.Enqueue(400);
+        queue.Enqueue(300);
+        queue.Enqueue(200);
         value = queue.Dequeue();
         Console.WriteLine(value);
         value = queue.Dequeue();
@@ -66,8 +66,8 @@
         if (_queue.Count <= 0)
             throw new IndexOutOfRangeException();
 
-        var value = _queue[1];
-        _queue.RemoveAt(1);
+        var value = _queue[0];
+        _queue.RemoveAt(0);
         return value;
     }
 }
